@@ -1,4 +1,4 @@
-# AeroBeat UI Shell
+# AeroBeat UI Shell - Web Community Edition
 
 This is an **Interaction Shell** for the AeroBeat platform.
 
