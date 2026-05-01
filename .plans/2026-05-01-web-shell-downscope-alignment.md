@@ -56,7 +56,7 @@ The main repo-local drift was dependency and positioning language. The README st
 - `.testbed/tests/test_example.gd.uid`
 - `.plans/2026-05-01-web-shell-downscope-alignment.md`
 
-**Status:** ⏳ Coder follow-up complete; QA recheck pending
+**Status:** ✅ Audited complete
 
 **Results:**
 - Reworded `README.md` so the repo now explicitly identifies itself as a future/deprioritized web shell and states that official v1 remains PC community first with camera-first Boxing + Flow (`REF-04`, `REF-05`).
@@ -65,26 +65,32 @@ The main repo-local drift was dependency and positioning language. The README st
 - Replaced the generic example GUT script with file-backed repo-truth guardrails that now read committed surfaces instead of asserting local constants.
 - The strengthened test now checks `README.md` for future/deprioritized positioning plus PC-first / camera-first wording, parses `plugin.cfg` to pin the future-facing description, and inspects `.testbed/addons.jsonc` to require `aerobeat-ui-core`, `aerobeat-ui-kit-community`, and `gut` while rejecting `aerobeat-core` drift.
 - Validation initially failed before restoring testbed addons because `gut` was not installed locally; after `godotenv addons install`, import and GUT validation passed.
-- QA reran the earlier validation flow independently and confirmed the committed manifest no longer pins `aerobeat-core`.
-- QA's shallow-test defect is now fixed locally; follow-up validation after the fix passed with 4/4 GUT tests green.
-- Commit hash: `ddc9a23`
+- Independent QA recheck on the committed repo verified `README.md`, `plugin.cfg`, `.testbed/project.godot`, `.testbed/addons.jsonc`, and `.testbed/tests/test_example.gd` against `REF-04`, `REF-05`, and `REF-06`.
+- Independent QA reran the repo validation flow with `godot --headless --path .testbed --import` and `godot --headless --path .testbed --script addons/gut/gut_cmdln.gd -gdir=res://tests -ginclude_subdirs -gexit`; import succeeded and GUT passed 4/4 tests with 17 asserts.
+- Independent QA confirmed the committed manifest contains `aerobeat-ui-core`, `aerobeat-ui-kit-community`, and `gut`, and that `aerobeat-core` is absent from `.testbed/addons.jsonc`.
+- QA's earlier shallow-test defect is resolved: the current guardrail meaningfully inspects committed repo surfaces instead of only checking local constants.
+- Independent auditor spot-check passed: verified docs truth in `REF-04`/`REF-05`, confirmed the committed repo surfaces match that truth, reviewed the implementing commits `5fdac5c`, `ddc9a23`, and `356c1a6`, and reran the headless import + GUT validation flow successfully (4/4 tests, 17 asserts).
+- Auditor conclusion: bead `oc-gfl` is complete and can be closed.
+- Commit hashes under review: `5fdac5c`, `ddc9a23`, `356c1a6`.
 
 ---
 
 ## Final Results
 
-**Status:** ⏳ Ready for QA recheck
+**Status:** ✅ Complete
 
-**What We Built:** A narrowed repo-truth pass that makes the web shell read as preserved future platform work instead of current official v1 delivery, cleans the dev/test manifest to match the shell's actual dependency boundary, and now enforces that truth through file-backed repo-surface assertions.
+**What We Built:** A narrowed repo-truth pass that makes the web shell read as preserved future platform work instead of current official v1 delivery, cleans the dev/test manifest to match the shell's actual dependency boundary, and enforces that truth through file-backed repo-surface assertions.
 
 **Reference Check:**
 - `REF-04` satisfied: README and metadata preserve PC-first, camera-first v1 messaging.
 - `REF-05` satisfied: web shell is labeled as future-platform work, not current-focus delivery.
-- `REF-06` satisfied for this coder follow-up: the canonical `.testbed/tests/` guardrail now inspects committed repo surfaces instead of restating expectations as local constants.
+- `REF-06` satisfied: the canonical `.testbed/tests/` guardrail inspects committed repo surfaces (`README.md`, `plugin.cfg`, `.testbed/addons.jsonc`) instead of restating expectations as local constants.
+- Auditor spot-check satisfied: fresh rerun of `godot --headless --path .testbed --import` and `godot --headless --path .testbed --script addons/gut/gut_cmdln.gd -gdir=res://tests -ginclude_subdirs -gexit` passed with 4/4 tests and 17 asserts.
 
 **Commits:**
 - `5fdac5c` - Downscope-align future web shell truth
 - `ddc9a23` - Strengthen web shell repo-truth guardrails
+- `356c1a6` - Record web shell QA-fix handoff
 
 **Lessons Learned:**
 - In these shell repos, dependency truth and platform-status messaging drift together; fixing one without the other leaves confusing package metadata behind.
