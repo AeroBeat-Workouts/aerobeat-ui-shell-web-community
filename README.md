@@ -1,15 +1,27 @@
 # AeroBeat UI Shell - Web Community Edition
 
-This is the community web **UI Shell** for the AeroBeat platform.
+This repository is the **future-facing community web UI shell** for AeroBeat.
 
-## 📋 Repository Details
+It is **not** the current official AeroBeat v1 delivery surface. The locked v1 direction is **PC community first** with **camera-first Boxing + Flow**. This web shell stays in the ecosystem as a preserved browser-target shell for later experimentation, follow-up platform work, and community exploration.
 
-*   **Type:** UI Shell
-*   **License:** **GNU GPLv3** (Strict Copyleft)
-*   **Dependencies:**
-    *   `aerobeat-ui-core` (Required UI logic contract)
-    *   `aerobeat-ui-kit-community` (Pinned visual layer)
-    *   Additional lane/core repos only when the shell actually consumes them
+## 📋 Repository Truth
+
+- **Type:** UI shell package / plugin boundary
+- **Platform status:** Future / deprioritized web shell, not current official v1 delivery
+- **License:** **GNU GPLv3** (strict copyleft)
+- **Primary runtime contract:** `aerobeat-ui-core`
+- **Pinned visual layer:** `aerobeat-ui-kit-community`
+- **Dev/test framework:** `gut`
+- **Package manifest note:** this repo does **not** currently ship a `package.json`; the repo-root package boundary is described by `plugin.cfg` and the GodotEnv testbed manifest
+
+## Scope note
+
+Keep this repo honest about its role:
+
+- preserve a browser-shell seam for future platform work
+- avoid claiming current v1 platform parity
+- do not imply official mobile/web/XR release status
+- keep dependency language limited to what this shell actually consumes
 
 ## GodotEnv development flow
 
@@ -32,7 +44,7 @@ cd .testbed
 godotenv addons install
 ```
 
-That restores this repo's current dev/test manifest into `.testbed/addons/`. Canonically, UI shell repos should describe themselves around `aerobeat-ui-core` plus the concrete UI kit and any other lane repos the shell actually consumes.
+That restores the current dev/test manifest into `.testbed/addons/`.
 
 ### Open the workbench
 
@@ -42,7 +54,7 @@ From the repo root:
 godot --editor --path .testbed
 ```
 
-Use this `.testbed/` project as the canonical direct-development and bugfinding surface for web shell work.
+Use this `.testbed/` project as the canonical direct-development and bugfinding surface for future web shell work.
 
 ### Import smoke check
 
@@ -66,7 +78,6 @@ godot --headless --path .testbed --script addons/gut/gut_cmdln.gd \
 ### Validation notes
 
 - `.testbed/addons.jsonc` is the committed dev/test dependency contract.
-- The current manifest still pins the transition-era `aerobeat-core` package key alongside `aerobeat-ui-core` and `aerobeat-ui-kit-community`. Treat that old core pin as bootstrap-state drift rather than the canonical lane model.
-- Canonical shared dependency language for UI shell repos is `aerobeat-ui-core` plus the concrete UI kit and any additional lane repos the shell actually consumes.
-- Repo-local unit tests live under `.testbed/tests/`; this repo's current package payload is rooted at `/`, so the workbench does not ship a `.testbed/src` bridge for this subset.
+- The canonical shell dependency story for this repo is `aerobeat-ui-core` + `aerobeat-ui-kit-community` + `gut` for tests.
+- Repo-local unit tests live under `.testbed/tests/`.
 - The current package shape is consumed from the repo root (`subfolder: "/"`) for downstream installs.

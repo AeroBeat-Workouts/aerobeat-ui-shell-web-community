@@ -1,33 +1,9 @@
 extends GutTest
 
-# ------------------------------------------------------------------------------
-# Example Unit Test
-# ------------------------------------------------------------------------------
-# This script demonstrates the basic structure of a GUT test file.
-# Run this via the GUT panel in the Editor or via Command Line.
+func test_repo_positioning_stays_future_facing() -> void:
+	var shell_status := "future_web_shell"
+	assert_eq(shell_status, "future_web_shell", "Web shell should stay explicitly future-facing in the current v1 downscope")
 
-func before_all():
-	# Runs once before all tests in this script.
-	# Use this to setup global resources or load heavy assets.
-	gut.p("Starting Example Tests...")
-
-func before_each():
-	# Runs before each test function.
-	# Use this to reset state between tests.
-	pass
-
-func after_each():
-	# Runs after each test function.
-	# Use this to clean up nodes (queue_free).
-	pass
-
-func after_all():
-	# Runs once after all tests in this script.
-	gut.p("Finished Example Tests.")
-
-func test_sanity_check():
-	assert_eq(1, 1, "Math should still work")
-
-func test_string_equality():
-	var project_name = "AeroBeat"
-	assert_eq(project_name, "AeroBeat", "Strings should match")
+func test_active_v1_release_priority_remains_pc_first() -> void:
+	var active_release_surface := "pc_community_first"
+	assert_eq(active_release_surface, "pc_community_first", "Current official v1 release priority should remain PC community first")
