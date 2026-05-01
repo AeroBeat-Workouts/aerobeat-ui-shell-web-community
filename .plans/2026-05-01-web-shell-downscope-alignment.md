@@ -35,13 +35,13 @@ The main repo-local drift was dependency and positioning language. The README st
 
 ## Tasks
 
-### Task 1: Audit and align repo truth
+### Task 1: Audit, align, and QA repo truth
 
 **Bead ID:** `oc-gfl`  
 **SubAgent:** `primary`  
-**Role:** `coder`  
+**Role:** `coder` → `qa`  
 **References:** `REF-01`, `REF-02`, `REF-03`, `REF-04`, `REF-05`, `REF-06`  
-**Prompt:** Claim the assigned bead, audit the repo against the downscoped AeroBeat docs truth, implement the required alignment changes, run relevant validation, commit/push to `main`, and leave concise handoff notes for QA.
+**Prompt:** Claim the assigned bead, audit the repo against the downscoped AeroBeat docs truth, implement the required alignment changes, run relevant validation, commit/push to `main`, and leave concise handoff notes for QA. QA must independently rerun validation and assess whether the new tests actually guard repo truth.
 
 **Folders Created/Deleted/Modified:**
 - `.plans/`
@@ -56,35 +56,40 @@ The main repo-local drift was dependency and positioning language. The README st
 - `.testbed/tests/test_example.gd.uid`
 - `.plans/2026-05-01-web-shell-downscope-alignment.md`
 
-**Status:** ✅ Complete
+**Status:** ⏳ Coder follow-up complete; QA recheck pending
 
 **Results:**
 - Reworded `README.md` so the repo now explicitly identifies itself as a future/deprioritized web shell and states that official v1 remains PC community first with camera-first Boxing + Flow (`REF-04`, `REF-05`).
 - Removed the stale `aerobeat-core` dependency from `.testbed/addons.jsonc`, leaving the manifest aligned to the shell's actual dependency story: `aerobeat-ui-core`, `aerobeat-ui-kit-community`, and `gut` (`REF-04`, `REF-06`).
 - Updated `plugin.cfg` description and `.testbed/project.godot` testbed name so metadata no longer implies an active primary shell.
-- Replaced the generic example GUT script with a small repo-truth smoke test that encodes the current future-facing / PC-first positioning expectations.
+- Replaced the generic example GUT script with file-backed repo-truth guardrails that now read committed surfaces instead of asserting local constants.
+- The strengthened test now checks `README.md` for future/deprioritized positioning plus PC-first / camera-first wording, parses `plugin.cfg` to pin the future-facing description, and inspects `.testbed/addons.jsonc` to require `aerobeat-ui-core`, `aerobeat-ui-kit-community`, and `gut` while rejecting `aerobeat-core` drift.
 - Validation initially failed before restoring testbed addons because `gut` was not installed locally; after `godotenv addons install`, import and GUT validation passed.
-- No additional follow-up bead was required from this repo-local pass.
+- QA reran the earlier validation flow independently and confirmed the committed manifest no longer pins `aerobeat-core`.
+- QA's shallow-test defect is now fixed locally; follow-up validation after the fix passed with 4/4 GUT tests green.
+- Commit hash: `44d48c8`
 
 ---
 
 ## Final Results
 
-**Status:** ✅ Complete
+**Status:** ⏳ Ready for QA recheck
 
-**What We Built:** A narrowed repo-truth pass that makes the web shell read as preserved future platform work instead of current official v1 delivery, while cleaning the dev/test manifest to match the shell's actual dependency boundary.
+**What We Built:** A narrowed repo-truth pass that makes the web shell read as preserved future platform work instead of current official v1 delivery, cleans the dev/test manifest to match the shell's actual dependency boundary, and now enforces that truth through file-backed repo-surface assertions.
 
 **Reference Check:**
-- `REF-04` satisfied: README and metadata now preserve PC-first, camera-first v1 messaging.
+- `REF-04` satisfied: README and metadata preserve PC-first, camera-first v1 messaging.
 - `REF-05` satisfied: web shell is labeled as future-platform work, not current-focus delivery.
-- `REF-06` satisfied: testbed/test locations remain the canonical validation surface.
+- `REF-06` satisfied for this coder follow-up: the canonical `.testbed/tests/` guardrail now inspects committed repo surfaces instead of restating expectations as local constants.
 
 **Commits:**
-- `936dcc5` - Downscope-align future web shell truth
+- `5fdac5c` - Downscope-align future web shell truth
+- `44d48c8` - Strengthen web shell repo-truth guardrails
 
 **Lessons Learned:**
 - In these shell repos, dependency truth and platform-status messaging drift together; fixing one without the other leaves confusing package metadata behind.
 - Running import/tests without restoring `.testbed` addons first can produce misleading failures, so `godotenv addons install` is part of the practical validation sequence.
+- Repo-truth tests only provide real drift protection when they read the committed files they are supposed to defend.
 
 ---
 
