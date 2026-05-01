@@ -67,7 +67,7 @@ The main repo-local drift was dependency and positioning language. The README st
 - Validation initially failed before restoring testbed addons because `gut` was not installed locally; after `godotenv addons install`, import and GUT validation passed.
 - QA reran the earlier validation flow independently and confirmed the committed manifest no longer pins `aerobeat-core`.
 - QA's shallow-test defect is now fixed locally; follow-up validation after the fix passed with 4/4 GUT tests green.
-- Commit hash: `44d48c8`
+- Commit hash: `ddc9a23`
 
 ---
 
@@ -84,7 +84,7 @@ The main repo-local drift was dependency and positioning language. The README st
 
 **Commits:**
 - `5fdac5c` - Downscope-align future web shell truth
-- `44d48c8` - Strengthen web shell repo-truth guardrails
+- `ddc9a23` - Strengthen web shell repo-truth guardrails
 
 **Lessons Learned:**
 - In these shell repos, dependency truth and platform-status messaging drift together; fixing one without the other leaves confusing package metadata behind.
